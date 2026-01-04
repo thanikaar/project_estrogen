@@ -31,7 +31,7 @@ h1 {
     background: white;
     border-radius: 0;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-    flex: 0 0 300px;
+    flex: 1;
     padding: 30px;
     border: 2px solid #000;
     max-height: 700px;
@@ -103,7 +103,7 @@ h1 {
     background: white;
     border-radius: 0;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-    flex: 1;
+    flex: 0 0 600px;
     padding: 30px;
     border: 2px solid #000;
     max-height: 700px;
@@ -315,4 +315,15 @@ h2 {
 .day.predicted-ovulation {
     background: #e8e8e8;
     font-weight: 600;
+}
+
+.Hagrid-container {
+    background: white;
+    border-radius: 0;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    flex: 1;
+    padding: 30px;
+    border: 2px solid #000;
+    max-height: 700px;
+    overflow-y: auto;
 }
