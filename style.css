@@ -244,7 +244,7 @@ h2 {
 }
 
 .legend-color.pred-ovu {
-    border: 2px dashed #666;
+    background: 2px #e8e8e8;
 }
 .stats {
     margin-top: 20px;
