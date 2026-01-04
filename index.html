@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>project_estrogen</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<h1>project_estrogen</h1>
+<div class="main-content">
+    <div class="history-container">
+        <h2>Period History</h2>
+        <div class="history-months" id="historyMonths"></div>
+    </div>
+    
+    <div class="container">
+        <header>
+            <h2>period tracker</h2>
+            <p class="subtitle">Click on dates to log your period</p>
+        </header>
+        <div class="calendar-nav">
+            <button class="nav-btn" id="prevMonth">←</button>
+            <div class="current-month" id="currentMonth"></div>
+            <button class="nav-btn" id="nextMonth">→</button>
+        </div>
+        <div class="calendar" id="calendar"></div>
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-color period"></div>
+                <span>Period Day</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color today"></div>
+                <span>Today</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color pred-period"></div>
+                <span>Predicted Period</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color pred-ovu"></div>
+                <span>Predicted Ovulation</span>
+            </div>
+            
+        </div>
+        <div class="stats">
+            <div class="stats-text" id="statsText">Click dates to start tracking</div>
+            <div class="cycle-info" id="cycleInfo"></div>
+        </div>
+        <div class="predictions" id="predictions"></div>
+    </div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
