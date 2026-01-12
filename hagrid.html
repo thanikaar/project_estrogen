@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hagrid's One of Many Pockets</title>
+<link rel="stylesheet" href="hagrid-style.css">
+</head>
+<body>
+<div class="header">
+    <a href="index.html" class="back-link">← Back to Main</a>
+    <h1>🎒 Hagrid's One of Many Pockets</h1>
+    <p class="subtitle">Track your daily wellbeing habits</p>
+</div>
+
+<div class="container">
+    <div class="date-selector">
+        <label for="dateInput">Select Date:</label>
+        <input type="date" id="dateInput">
+    </div>
+
+    <form class="habits-form" id="habitsForm">
+        <div class="habit-group">
+            <label class="habit-label">Happiness/Fulfillment</label>
+            <div class="slider-container">
+                <input type="range" min="1" max="10" value="5" class="slider" id="happiness">
+                <span class="slider-value" id="happinessValue">5</span>
+            </div>
+            <div class="scale-labels">
+                <span>1 (Low)</span>
+                <span>10 (High)</span>
+            </div>
+        </div>
+
+        <div class="habit-group">
+            <label class="habit-label">Sleep Quality</label>
+            <div class="slider-container">
+                <input type="range" min="1" max="10" value="5" class="slider" id="sleep">
+                <span class="slider-value" id="sleepValue">5</span>
+            </div>
+            <div class="scale-labels">
+                <span>1 (Poor)</span>
+                <span>10 (Excellent)</span>
+            </div>
+        </div>
+
+        <div class="habit-group">
+            <label class="habit-label">Exercise</label>
+            <div class="slider-container">
+                <input type="range" min="1" max="10" value="5" class="slider" id="exercise">
+                <span class="slider-value" id="exerciseValue">5</span>
+            </div>
+            <div class="scale-labels">
+                <span>1 (None)</span>
+                <span>10 (Intense)</span>
+            </div>
+        </div>
+
+        <div class="habit-group">
+            <label class="habit-label">Breathing Sitdowns</label>
+            <div class="slider-container">
+                <input type="range" min="1" max="10" value="5" class="slider" id="breathing">
+                <span class="slider-value" id="breathingValue">5</span>
+            </div>
+            <div class="scale-labels">
+                <span>1 (Brief)</span>
+                <span>10 (Deep)</span>
+            </div>
+        </div>
+
+        <button type="submit" class="submit-btn">Save Entry</button>
+    </form>
+
+    <div class="success-message" id="successMessage">
+        ✓ Entry saved successfully!
+    </div>
+
+    <div class="history">
+        <h2>Recent Entries</h2>
+        <div class="history-entries" id="historyEntries"></div>
+    </div>
+</div>
+
+<script src="hagrid-script.js"></script>
+</body>
+</html>

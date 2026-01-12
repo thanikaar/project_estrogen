@@ -357,3 +357,124 @@ loadData();
 renderCalendar();
 updateStats();
 renderHistory();
+renderHabitsTrend();
+
+function renderHabitsTrend() {
+    const habitsTrendDiv = document.getElementById('habitsTrend');
+    const habitsData = loadHabitsData();
+    
+    if (!habitsData || Object.keys(habitsData).length === 0) {
+        habitsTrendDiv.innerHTML = '<p style="text-align: center; color: #666; margin-top: 20px;">No habits tracked yet. Click the link above to start!</p>';
+        return;
+    }
+    
+    // Get current month's data
+    const currentMonth = new Date().getMonth();
+    const currentYear = new Date().getFullYear();
+    
+    const monthData = Object.keys(habitsData)
+        .filter(dateKey => {
+            const date = new Date(dateKey);
+            return date.getMonth() === currentMonth && date.getFullYear() === currentYear;
+        })
+        .sort()
+        .map(dateKey => ({
+            date: dateKey,
+            ...habitsData[dateKey]
+        }));
+    
+    if (monthData.length === 0) {
+        habitsTrendDiv.innerHTML = '<p style="text-align: center; color: #666; margin-top: 20px;">No data for this month yet.</p>';
+        return;
+    }
+    
+    const colors = {
+        happiness: '#FF6B6B',
+        sleep: '#4ECDC4',
+        exercise: '#45B7D1',
+        breathing: '#96CEB4'
+    };
+    
+    let html = '<div class="trend-chart">';
+    html += '<div class="trend-title">Monthly Wellbeing Trends</div>';
+    
+    // Create chart
+    html += '<div class="chart-container">';
+    html += '<div class="y-axis-labels">';
+    for (let i = 10; i >= 0; i -= 2) {
+        html += `<span>${i}</span>`;
+    }
+    html += '</div>';
+    html += '<div class="chart-dots" id="chartDots"></div>';
+    html += '</div>';
+    
+    // X-axis labels
+    html += '<div class="x-axis-labels">';
+    const daysToShow = Math.min(monthData.length, 5);
+    const step = Math.floor(monthData.length / daysToShow);
+    for (let i = 0; i < monthData.length; i += step || 1) {
+        const date = new Date(monthData[i].date);
+        html += `<span>${date.getDate()}</span>`;
+    }
+    html += '</div>';
+    
+    // Legend
+    html += '<div class="habit-legend">';
+    html += `<div class="legend-habit-item"><div class="legend-habit-color" style="background: ${colors.happiness}"></div><span>Happiness</span></div>`;
+    html += `<div class="legend-habit-item"><div class="legend-habit-color" style="background: ${colors.sleep}"></div><span>Sleep</span></div>`;
+    html += `<div class="legend-habit-item"><div class="legend-habit-color" style="background: ${colors.exercise}"></div><span>Exercise</span></div>`;
+    html += `<div class="legend-habit-item"><div class="legend-habit-color" style="background: ${colors.breathing}"></div><span>Breathing</span></div>`;
+    html += '</div>';
+    
+    html += '</div>';
+    habitsTrendDiv.innerHTML = html;
+    
+    // Draw dots and lines
+    const chartDots = document.getElementById('chartDots');
+    const chartWidth = chartDots.offsetWidth || 500;
+    const chartHeight = chartDots.offsetHeight || 180;
+    
+    ['happiness', 'sleep', 'exercise', 'breathing'].forEach(habit => {
+        let prevX = null, prevY = null;
+        
+        monthData.forEach((entry, index) => {
+            if (entry[habit] !== undefined) {
+                const x = (index / (monthData.length - 1 || 1)) * chartWidth;
+                const y = chartHeight - ((entry[habit] / 10) * chartHeight);
+                
+                // Draw line to previous point
+                if (prevX !== null && prevY !== null) {
+                    const line = document.createElement('div');
+                    line.className = 'chart-line';
+                    const length = Math.sqrt(Math.pow(x - prevX, 2) + Math.pow(y - prevY, 2));
+                    const angle = Math.atan2(y - prevY, x - prevX) * 180 / Math.PI;
+                    line.style.width = `${length}px`;
+                    line.style.left = `${prevX}px`;
+                    line.style.top = `${prevY}px`;
+                    line.style.transform = `rotate(${angle}deg)`;
+                    line.style.background = colors[habit];
+                    chartDots.appendChild(line);
+                }
+                
+                // Draw dot
+                const dot = document.createElement('div');
+                dot.className = 'chart-dot';
+                dot.style.left = `${x - 4}px`;
+                dot.style.top = `${y - 4}px`;
+                dot.style.background = colors[habit];
+                chartDots.appendChild(dot);
+                
+                prevX = x;
+                prevY = y;
+            }
+        });
+    });
+}
+
+function loadHabitsData() {
+    const saved = localStorage.getItem('habitsTrackerData');
+    if (saved) {
+        return JSON.parse(saved);
+    }
+    return {};
+}

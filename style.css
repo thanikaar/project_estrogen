@@ -34,7 +34,7 @@ h1 {
     flex: 1;
     padding: 30px;
     border: 2px solid #000;
-    max-height: 700px;
+    max-height: calc(100vh - 100px);
     overflow-y: auto;
 }
 
@@ -106,7 +106,8 @@ h1 {
     flex: 0 0 600px;
     padding: 30px;
     border: 2px solid #000;
-    max-height: 700px;
+    max-height: 
+    calc(100vh - 100px);
     overflow-y: auto;
 }
 
@@ -324,6 +325,6 @@ h2 {
     flex: 1;
     padding: 30px;
     border: 2px solid #000;
-    max-height: 700px;
+    max-height: calc(100vh - 100px);
     overflow-y: auto;
 }
